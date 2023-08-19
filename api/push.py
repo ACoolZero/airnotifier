@@ -88,6 +88,8 @@ class PushHandler(APIBaseHandler):
             device = request_dict.get("device", DEVICE_TYPE_FCM).lower()
             channel = request_dict.get("channel", "default")
             alert = request_dict.get("alert", "")
+            msg = request_dict.get("msg", "")
+            system_id = request_dict.get("system", "")
             token = self.dao.find_token(self.token)
 
             if not token:
@@ -108,7 +110,7 @@ class PushHandler(APIBaseHandler):
                     self.send_response(INTERNAL_SERVER_ERROR, dict(error=str(ex)))
                     return
 
-            logging.info("sending notification to %s: %s" % (device, self.token))
+            logging.info("sending notification to %s: %s - %s" % (device, system_id, self.token))
             #  if device in [DEVICE_TYPE_FCM, DEVICE_TYPE_ANDROID]:
             if device.endswith(DEVICE_TYPE_FCM):
                 fcm = request_dict.get("fcm", {})
@@ -140,14 +142,23 @@ class PushHandler(APIBaseHandler):
                 conn = self.get_apns_conn()
                 if conn:
                     try:
+                        logging.info(conn)
                         conn.process(
                             token=self.token,
                             alert=alert,
+                            msg=msg,
                             apns={**apns_default, **apnspayload},
                         )
                     except Exception as ex:
                         logging.error(ex)
-                        self.send_response(400, dict(error="error response from apns"))
+                        try:
+                            err = json_decode(ex.error)
+                            reason = err.get("reason")
+                            if reason == None:
+                                reason = ex.error
+                        except Exception:
+                            reason = ex.error
+                        self.send_response(400, dict(error="error reponse from apns", reason=reason))
                         return
                 else:
                     logging.error("no active apns connection")
