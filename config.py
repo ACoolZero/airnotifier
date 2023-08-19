@@ -5,7 +5,7 @@
 port = 8801
 
 # mongouri = 'mongodb://root:pass@localhost:27017/'
-mongouri = "mongodb://mongodb:27018/" # This is for quick use inside my Docker
+mongouri = "mongodb://mongodb:27017/"
 
 passwordsalt = 'd2o0n1g2s0h3e1n1g'
 cookiesecret = 'airnotifiercookiesecret'
