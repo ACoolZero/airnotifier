@@ -60,7 +60,8 @@ if __name__ == "__main__":
     tornado.options.parse_command_line()
     mongodb = pymongo.MongoClient(options.mongouri)
     masterdb = mongodb[options.masterdb]
-
+    logging.info(options)
+    
     collection_names = masterdb.collection_names()
     try:
         if not "applications" in collection_names:
