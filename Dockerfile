@@ -6,9 +6,6 @@ ENV DEBIAN_FRONTEND=noninteractive TERM=linux
 
 EXPOSE 8801
 
-RUN dnf update -y && \
-    dnf install -y git ca-certificates
-
 RUN pip3 install pipenv
 
 RUN git clone https://github.com/acoolzero/airnotifier.git /airnotifier
