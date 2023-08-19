@@ -17,6 +17,6 @@ WORKDIR /airnotifier
 
 RUN pipenv install --deploy
 
-ADD start.sh /airnotifier
+#ADD start.sh /airnotifier
 RUN chmod a+x /airnotifier/start.sh
 ENTRYPOINT ["/airnotifier/start.sh"]
