@@ -58,7 +58,10 @@ if __name__ == "__main__":
 
     tornado.options.parse_config_file("config.py")
     tornado.options.parse_command_line()
-    logging.info("Tmp logging: ", options, options.mongouri)
+    echo "Here"
+    print("Here")
+    print(options)
+    print("Tmp logging: ", options, options.mongouri)
     mongodb = pymongo.MongoClient(options.mongouri)
     masterdb = mongodb[options.masterdb]
     
