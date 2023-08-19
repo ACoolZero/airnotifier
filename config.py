@@ -9,7 +9,7 @@ mongouri = "mongodb://mongodb:27018/" # This is for quick use inside my Docker
 
 passwordsalt = 'd2o0n1g2s0h3e1n1g'
 cookiesecret = 'airnotifiercookiesecret'
-debug = False
+debug = True
 
 masterdb = "airnotifier"
 collectionprefix = "obj_"
