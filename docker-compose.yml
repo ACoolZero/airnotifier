@@ -15,6 +15,7 @@ services:
       - ./mongo/data:/data/db
       - ./mongo/log:/tmp/mongo
     command: mongod --logpath=/dev/null # --quiet
+  
   airnotifier:
     links:
       - mongodb
@@ -30,3 +31,4 @@ services:
     environment:
       - MONGO_SERVER=mongodb
       - MONGO_PORT=27017
+    command: python3 /airnotifier/install.py
