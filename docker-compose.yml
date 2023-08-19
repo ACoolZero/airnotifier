@@ -21,7 +21,7 @@ services:
       - mongodb
     depends_on:
       - mongodb
-    build: .
+    build: -t reliable/airnotifier .
     container_name: airnotifier
     volumes:
       - ./certs:/var/airnotifier/pemdir
