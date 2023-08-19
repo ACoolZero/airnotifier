@@ -58,7 +58,6 @@ if __name__ == "__main__":
 
     tornado.options.parse_config_file("config.py")
     tornado.options.parse_command_line()
-    echo "Here"
     print("Here")
     print(options)
     print("Tmp logging: ", options, options.mongouri)
