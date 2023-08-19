@@ -58,9 +58,9 @@ if __name__ == "__main__":
 
     tornado.options.parse_config_file("config.py")
     tornado.options.parse_command_line()
+    logging.info(options)
     mongodb = pymongo.MongoClient(options.mongouri)
     masterdb = mongodb[options.masterdb]
-    logging.info(options)
     
     collection_names = masterdb.collection_names()
     try:
