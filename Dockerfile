@@ -1,12 +1,13 @@
 FROM python:3.9
+
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive TERM=linux
 
 EXPOSE 8801
 
-RUN dnf update && \
-    dnf install -y git ca-certificates build-essential python-dev
+RUN dnf update -y && \
+    dnf install -y git ca-certificates
 
 RUN pip3 install pipenv
 
@@ -21,4 +22,4 @@ RUN pipenv install --deploy
 
 ADD start.sh /airnotifier
 RUN chmod a+x /airnotifier/start.sh
-ENTRYPOINT /airnotifier/start.sh
+ENTRYPOINT ["/airnotifier/start.sh"]
